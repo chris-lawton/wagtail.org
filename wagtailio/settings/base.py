@@ -53,10 +53,10 @@ INSTALLED_APPS = (
     "django.contrib.messages",
     "django.contrib.sitemaps",
     "django.contrib.staticfiles",
-    "compressor",
     "taggit",
     "modelcluster",
     "rest_framework",
+    "manifest_loader",
     "wagtail_ab_testing",
     "wagtail_transfer",
     "wagtail_airtable",
@@ -130,10 +130,9 @@ STATIC_URL = env.get("STATIC_URL", "/static/")
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    "compressor.finders.CompressorFinder",
 )
 
-STATICFILES_DIRS = (join(PROJECT_ROOT, "static"),)
+STATICFILES_DIRS = (join(PROJECT_ROOT, "static_compiled"),)
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -211,12 +210,6 @@ else:
             # PGPORT environment variables (these get picked up by libpq).
         }
     }
-
-
-# Django compressor settings
-# http://django-compressor.readthedocs.org/en/latest/settings/
-
-COMPRESS_PRECOMPILERS = (("text/x-scss", "django_libsass.SassCompiler"),)
 
 
 # Template configuration
